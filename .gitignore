@@ -1,3 +1,4 @@
 *.csv
 *.hdf5
 *.h5
+data/*

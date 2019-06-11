@@ -10,7 +10,7 @@ import numpy as np
 #################
 
 def typeset(v):
-        '''convert into typearr'''
+        '''convert into typearr (type array)'''
         x,y = v
         #print np.array(x)[0].astype(y),y
         z =  np.array(x)[0].astype(y)
@@ -36,7 +36,7 @@ def reresub(x):
 
 
 
-def parse_s3 (fileKey, typearr = False, delimiter = ',', header=0,chunk = 1500000, location = './data/'):
+def parse_s3 (fileKey, typearr = False, delimiter = ',', header=0,chunk = 1500000, location = './'):
     '''
     A remaker for the csv data once all inacuracies have been fixed.
     Rows not matching the header style will be ignored.
