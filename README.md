@@ -1,5 +1,6 @@
-#COMTRADE
-###Description
+# COMTRADE
+
+### Description
 A set of code to pre-process the COMTRADE `.csv` files and optionally create a series of `h5 or hdf5` binary typed files for machines with limited memory. These are typically 9 times smaller than the original files.
 
 A `combined_comtrade.hdf5` may also be produced. This is XXX MB and contains all the current data. For comparison the largest individual csv is ...
@@ -23,6 +24,18 @@ Although it is possible to define a more complex delimiter, the simplest solutio
 - the basic conda distribution - this contains os,sys,re,pandas,numpy,base etc.
 - h5py
 - boto3
+
+
+## Running order
+1. Get all the keys using `whatfiles.py`
+2. Find all the types needed with `get_types.py`
+3. Check for any further tweaks `typearrays.json`
+
+4. Run `correct.py` for all required files. This is best done in parallel using the shell script and slurm (a different file may be required for other managers, eg PBS. )
+
+5. Concat all the hdf5 files into a single, smaller one using `concat_h5.py`
+
+6. Extract and query code with an adaption of `extract_full.py`
 
 
 ## Directory contents and their description.
@@ -55,14 +68,3 @@ Uniformly sample n lines across all the rows in all the files and determine a po
 
 ### whatfiles.py
 Gets all the files in the relevant trace bucket and saves their keys into `read.files`.
-
-## Running order
-1. Get all the keys using `whatfiles.py`
-2. Find all the types needed with `get_types.py`
-3. Check for any further tweaks `typearrays.json`
-
-4. Run `correct.py` for all required files. This is best done in parallel using the shell script and slurm (a different file may be required for other managers, eg PBS. )
-
-5. Concat all the hdf5 files into a single, smaller one using `concat_h5.py`
-
-6. Extract and query code with an adaption of `extract_full.py`
